@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Email Microservice</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    code {
+      background: #e8e8e8;
+      padding: 2px 4px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    .folder {
+      white-space: pre-wrap;
+      background: #f4f4f4;
+      padding: 1rem;
+      border-left: 5px solid #2c3e50;
+      border-radius: 6px;
+      font-family: monospace;
+    }
+    a {
+      color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📧 Email Microservice</h1>
+  <p>A reusable and deployable microservice built with <strong>Node.js</strong>, <strong>Express</strong>, and <strong>Nodemailer</strong> that allows you to send templated emails via a simple REST API.</p>
+
+  <hr />
+
+  <section>
+    <h2>🚀 Features</h2>
+    <ul>
+      <li>Send emails via SMTP (Gmail, Outlook, SendGrid, etc.)</li>
+      <li>HTML email templating with variable injection</li>
+      <li>JSON-based API for sending emails</li>
+      <li>Environment-based configuration</li>
+      <li>Easily pluggable into any project via HTTP requests</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🏗️ Project Structure</h2>
+    <div class="folder">
+email-microservice/
+├── config/              # Mailer config using SMTP
+├── controllers/         # Core email sending logic
+├── routes/              # API route for sending emails
+├── templates/           # HTML email templates
+├── .env                 # Environment variables
+├── app.js               # Server entry point 
+└── package.json         # Node dependencies and scripts
+    </div>
+  </section>
+
+  <section>
+    <h2>🛠️ Setup Instructions</h2>
+
+    <h3>1. Clone the repository</h3>
+    <pre><code>git clone https://github.com/naseer-bhat/microServices/tree/73a8c7e1856b1ab680abe49ec5c7074e716fc776/EmailMicroService</code></pre>
+
+    <h3>2. Install dependencies</h3>
+    <pre><code>npm install</code></pre>
+
+    <h3>3. Configure environment variables</h3>
+    <p>Create a <code>.env</code> file:</p>
+    <pre><code>PORT=5000
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_app_password</code></pre>
+    <p><strong>⚠️ Note:</strong> Use App Passwords if using Gmail and enable "less secure apps" or OAuth2.</p>
+  </section>
+
+  <section>
+    <h2>🧪 Run the Server</h2>
+    <pre><code>npm start</code></pre>
+    <p>Server runs at <code>http://localhost:5000</code> by default.</p>
+  </section>
+
+  <section>
+    <h2>📬 API Endpoint</h2>
+    <h3>POST <code>/api/sendmail</code></h3>
+    <p><strong>Request Body:</strong></p>
+    <pre><code>{
+  "to": "recipient@example.com",
+  "subject": "Welcome to our app!",
+  "template": "welcome",
+  "data": {
+    "username": "Naseer"
+  }
+}</code></pre>
+    <ul>
+      <li><code>template</code>: Name of the HTML file inside <code>templates/</code> (without <code>.html</code>)</li>
+      <li><code>data</code>: Key-value pairs to inject into the <code>{{variable}}</code> placeholders in the template</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🖋️ Email Template Example (<code>templates/welcome.html</code>)</h2>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hello, {{username}} 👋&lt;/h1&gt;
+    &lt;p&gt;Welcome to our platform!&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </section>
+
+  <section>
+    <h2>🔐 Security</h2>
+    <ul>
+      <li>🔑 Add API Key auth to protect endpoint</li>
+      <li>🕵️‍♂️ Log all email requests</li>
+      <li>🕰️ Add queuing (Bull + Redis) for async/retry support</li>
+      <li>📈 Monitor failures with logging tools (e.g., Winston)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>📦 Example Usage in Other Projects</h2>
+    <pre><code>import axios from "axios";
+
+await axios.post("https://microservices-kccr.onrender.com/api/sendmail", {
+  to: "user@example.com",
+  subject: "Hello!",
+  template: "welcome",
+  data: { username: "Naseer" }
+});</code></pre>
+  </section>
+
+  <section>
+    <h2>🤝 License</h2>
+    <p> © 2025 <strong>Naseer Ahmad Bhat</strong></p>
+  </section>
+
+</body>
+</html>
